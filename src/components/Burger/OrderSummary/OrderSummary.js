@@ -6,7 +6,7 @@ import Button from '../../UI/Button/Button';
 class OrderSummary extends Component {
 
     componentWillUpdate() {
-        console.log('[Order Summary] Will update');
+        console.log('[O rder Summary] Will update');
     }
 
     render() {
@@ -19,7 +19,7 @@ class OrderSummary extends Component {
                 );
             })
 
-        return (
+        return (    
             <Aux>
                 <h3>Your Order</h3>
                 <p>A delicious burger with the following ingredients:</p>
