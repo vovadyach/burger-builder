@@ -46,27 +46,40 @@ class BurgerBuilder extends Component {
     }
 
     continuePurchaseHandler = () => {
-        this.setState({ loading: true });
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            cutomer: {
-                name: 'volodymy Diachenko',
-                address: {
-                    street: 'Street 1',
-                    zipCode: '12323',
-                    country: 'Ukrainer'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
-        }
+                
+        // this.setState({ loading: true });
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     cutomer: {
+        //         name: 'volodymy Diachenko',
+        //         address: {
+        //             street: 'Street 1',
+        //             zipCode: '12323',
+        //             country: 'Ukrainer'
+        //         },
+        //         email: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
 
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({ loading: false, purchasing: false })
-            })
-            .catch(error => this.setState({ loading: false, purchasing: false }));
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({ loading: false, purchasing: false })
+        //     })
+        //     .catch(error => this.setState({ loading: false, purchasing: false }));
+
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + this.state.ingredients[i]);
+        }
+        const queryString = queryParams.join('&');
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+
+        });
     }
 
     updatPurchaseState(ingredients) {
