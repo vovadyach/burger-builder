@@ -95,12 +95,12 @@ class ContactData extends Component {
                 valid: true
             }
         },
-        loading: false
+        formIsValid: false
     }
 
     orderHandler = (event) => {
         event.preventDefault();
-        
+
         const formData = {};
         for (let formElementIdentifier in this.state.orderForm) {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
@@ -115,7 +115,7 @@ class ContactData extends Component {
         this.props.onOrderBurger(order);
     }
 
-    checkValidity (value, rules) {
+    checkValidity(value, rules) {
         let isValid = true;
 
         if (rules.required) {
@@ -153,14 +153,14 @@ class ContactData extends Component {
         };
 
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);       
-        updatedFormElement.touched = true; 
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
         let formIsValid = true;
         for (let inputdentifier in updatedOrderForm) {
             formIsValid = updatedOrderForm[inputdentifier].valid && formIsValid
-        }       
+        }
 
         this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
     };
@@ -189,13 +189,12 @@ class ContactData extends Component {
                         changed={(event) => this.inputChnageHandler(event, formElement.id)} />
                 ))}
                 <Button
-                    btnType="Success" 
-                    disabled={!this.state.formIsValid}
-                    clicked={this.orderHandler}>ORDER</Button>
+                    btnType="Success"
+                    disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
 
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner />
         }
 
@@ -212,7 +211,7 @@ const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.orders.loading 
+        loading: state.order.loading
     }
 };
 
