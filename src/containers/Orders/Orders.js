@@ -23,7 +23,7 @@ class Orders extends Component {
             ));
         }
         return (
-            <div>
+            <div> 
                 {orders}
             </div>
         );
