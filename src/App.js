@@ -16,7 +16,7 @@ class App extends Component {
     }
 
     render() {
-
+ 
         let routes = (
             <Switch>
                 <Route path='/authentification' component={Auth} />

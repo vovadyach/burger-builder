@@ -49,6 +49,7 @@ class Auth extends Component {
         }
     }
 
+
     checkValidity(value, rules) {
         let isValid = true;
 
