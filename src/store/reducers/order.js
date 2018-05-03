@@ -16,12 +16,9 @@ const purchaseBurgerStart = (state, action) => {
 }
 
 const purchaseBurgerSuccess = (state, action) => {
-    const newOrder = {
-        ...action.orderData,
-        id: action.orderId
-    }
+    const newOrder = updateObject(action.orderData, { id: action.orderId });
     return updateObject(state, {
-        loading: true,
+        loading: false,
         purchased: true,
         orders: state.orders.concat(newOrder)
     });
@@ -41,7 +38,7 @@ const fetchOrdersSuccess = (state, action) => {
 
 const fetchOrdersFail = (state, action) => {
     return updateObject(state, { loading: false });
-} 
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {

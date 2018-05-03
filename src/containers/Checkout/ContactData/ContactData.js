@@ -215,7 +215,7 @@ const mapStateToProps = state => {
         loading: state.order.loading,
         token: state.auth.token,
         userId: state.auth.userId
-    }
+    } 
 };
 
 const mapDispatchToProps = dispatch => {
