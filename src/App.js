@@ -9,6 +9,21 @@ import Orders from './containers/Orders/Orders';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
+import asyncComponent from './hoc/asyncComponent/asyncComponent';
+
+
+const asyncCheckout = asyncComponent(() => {
+    return import(Checkout);
+});
+
+const asyncOrders = asyncComponent(() => {
+    return import(Orders);
+});
+
+const asyncAuth = asyncComponent(() => {
+    return import(Auth);
+});
+
 
 class App extends Component {
     componentDidMount() {
@@ -19,7 +34,7 @@ class App extends Component {
  
         let routes = (
             <Switch>
-                <Route path='/authentification' component={Auth} />
+                <Route path='/authentification' component={asyncAuth} />
                 <Route path='/' exact component={BurgerBuilder} />
                 <Redirect to='/' />
             </Switch>
@@ -28,9 +43,9 @@ class App extends Component {
         if (this.props.isAuthinticated) {
             routes = (
                 <Switch>
-                    <Route path='/checkout' component={Checkout} />
-                    <Route path='/orders' component={Orders} />
-                    <Route path='/authentification' component={Auth} />
+                    <Route path='/checkout' component={asyncCheckout} />
+                    <Route path='/orders' component={asyncOrders} />
+                    <Route path='/authentification' component={asyncAuth} />
                     <Route path='/logout' component={Logout} />
                     <Route path='/' exact component={BurgerBuilder} />
                     <Redirect to='/' />
